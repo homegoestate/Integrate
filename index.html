@@ -4,15 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>宏國地政 | 易丞地政 - 旗艦智慧入口</title>
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Vue 3 -->
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- Phosphor Icons (for clean, Apple-like icons) -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    <!-- Google Fonts: Noto Sans TC -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
 
     <script>
@@ -28,17 +23,11 @@
                         },
                         glass: {
                             100: 'rgba(255, 255, 255, 0.1)',
-                            200: 'rgba(255, 255, 255, 0.2)',
-                            300: 'rgba(255, 255, 255, 0.3)',
                             border: 'rgba(255, 255, 255, 0.4)',
-                            text: 'rgba(255, 255, 255, 0.9)'
                         }
                     },
                     fontFamily: {
                         sans: ['"Noto Sans TC"', 'system-ui', '-apple-system', 'sans-serif'],
-                    },
-                    backdropBlur: {
-                        xs: '2px',
                     }
                 }
             }
@@ -47,7 +36,6 @@
     <style>
         body {
             background-color: #f3f4f6;
-            /* Mesh Gradient Background */
             background-image: 
                 radial-gradient(at 0% 0%, hsla(189,100%,56%,0.2) 0px, transparent 50%),
                 radial-gradient(at 100% 0%, hsla(168,100%,60%,0.2) 0px, transparent 50%),
@@ -56,6 +44,9 @@
             background-attachment: fixed;
             background-size: cover;
             color: #1f2937;
+            /* Prevent text selection to protect content */
+            user-select: none; 
+            -webkit-user-select: none;
         }
 
         /* Glassmorphism Classes */
@@ -94,56 +85,52 @@
             box-shadow: 0 6px 20px rgba(56, 178, 172, 0.4);
         }
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
+        /* Primary Action Button Style (High Visibility) */
+        .btn-primary-action {
+            background: linear-gradient(90deg, #319795 0%, #2c7a7b 100%);
+            color: white;
+            box-shadow: 0 2px 10px rgba(49, 151, 149, 0.3);
+            border: 1px solid transparent;
         }
-        ::-webkit-scrollbar-track {
-            background: rgba(0,0,0,0.05); 
-        }
-        ::-webkit-scrollbar-thumb {
-            background: rgba(56, 178, 172, 0.5); 
-            border-radius: 4px;
-        }
-        
-        /* Animation */
-        .fade-enter-active, .fade-leave-active {
-            transition: opacity 0.3s ease;
-        }
-        .fade-enter-from, .fade-leave-to {
-            opacity: 0;
+        .btn-primary-action:hover {
+            background: linear-gradient(90deg, #2c7a7b 0%, #234e52 100%);
+            box-shadow: 0 4px 15px rgba(49, 151, 149, 0.4);
         }
 
-        .chart-container {
-            position: relative;
-            width: 100%;
-            height: 300px;
-            max-width: 100%;
+        /* Secondary Link Style */
+        .btn-secondary-link {
+            background: rgba(255,255,255,0.6);
+            color: #4a5568;
+            border: 1px solid rgba(0,0,0,0.05);
         }
+        .btn-secondary-link:hover {
+            background: white;
+            color: #319795;
+            border-color: #319795;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: rgba(0,0,0,0.05); }
+        ::-webkit-scrollbar-thumb { background: rgba(56, 178, 172, 0.5); border-radius: 4px; }
+        
+        .chart-container { position: relative; width: 100%; height: 300px; max-width: 100%; }
     </style>
-    <!-- Placeholder Comments -->
-    <!-- Chosen Palette: Glassmorphism / Apple Style with Brand Teal/Blue-Green Accents -->
-    <!-- Application Structure Plan: 
-         1. Header: Brand Identity & Trust.
-         2. Contextual Navigation (Hero): "I am a..." selector to filter tools instantly based on user intent (Buyer, Seller, etc.).
-         3. Tools Portal (Grid): The core functionality, displaying the 6 key categories in glass cards with direct access to calculators and videos.
-         4. Strategic Dashboard (Charts): Visualizing the "Why" - data behind the tools (Time on site, Mobile usage) to inform the client/internal team of value.
-         5. Trust & Safety: Highlight anti-fraud measures.
-         6. Footer: Copyright.
-         Why: This structure prioritizes the user's immediate need (solving a tax/money problem) while subtly reinforcing the brand's authority through data and trust signals.
-    -->
-    <!-- Visualization & Content Choices:
-         - Categories presented as interactive cards with icons: Easy visual scanning.
-         - Charts (Bar & Doughnut): To visualize the "2026 Strategy" insights (Mobile usage & Engagement) provided in the source text.
-         - Modals/Links: Direct access to the external tools provided.
-         - Confirmation: NO SVG graphics used (using Phosphor icons library). NO Mermaid JS used.
-    -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    
+    <script>
+        document.addEventListener('contextmenu', event => event.preventDefault());
+        document.onkeydown = function(e) {
+            if(e.keyCode == 123) { return false; } // F12
+            if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) { return false; } // Ctrl+Shift+I
+            if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) { return false; } // Ctrl+Shift+C
+            if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) { return false; } // Ctrl+Shift+J
+            if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) { return false; } // Ctrl+U
+        }
+    </script>
 </head>
 <body class="antialiased min-h-screen">
     
     <div id="app">
-        <!-- Navigation -->
         <nav class="fixed w-full z-50 transition-all duration-300" :class="{'glass-panel py-3': scrolled, 'bg-transparent py-5': !scrolled}">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
                 <div class="flex items-center gap-3">
@@ -159,14 +146,14 @@
                     <a href="#tools" class="hover:text-brand transition-colors">智慧試算</a>
                     <a href="#strategy" class="hover:text-brand transition-colors">趨勢分析</a>
                     <a href="#trust" class="hover:text-brand transition-colors">防詐專區</a>
-                    <button class="glass-btn px-5 py-2 rounded-full font-semibold">
+                    <a href="https://line.me/R/ti/p/@604gpqef" target="_blank" class="glass-btn px-5 py-2 rounded-full font-semibold flex items-center gap-2">
+                        <i class="ph ph-chat-circle-dots text-lg"></i>
                         預約諮詢
-                    </button>
+                    </a>
                 </div>
             </div>
         </nav>
 
-        <!-- Hero Section with Contextual Nav -->
         <header class="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
             <div class="max-w-5xl mx-auto text-center relative z-10">
                 <span class="inline-block py-1 px-3 rounded-full bg-teal-50 border border-teal-100 text-teal-600 text-xs font-bold tracking-widest uppercase mb-4 shadow-sm">
@@ -179,7 +166,6 @@
                     透過大數據試算與稅務規劃，為您守護每一分資產。從重購退稅到房地合一，我們提供最精準的線上評估工具。
                 </p>
 
-                <!-- Contextual Navigation (User Intent) -->
                 <div class="glass-panel p-2 rounded-3xl max-w-3xl mx-auto shadow-xl inline-flex flex-wrap justify-center gap-2">
                     <button 
                         v-for="role in roles" 
@@ -193,15 +179,11 @@
                     </button>
                 </div>
             </div>
-
-            <!-- Background Decor -->
             <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-tr from-teal-200/30 to-blue-200/30 rounded-full blur-3xl -z-10 animate-pulse"></div>
         </header>
 
-        <!-- Main Content Grid -->
         <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
             
-            <!-- Tools Section -->
             <section id="tools" class="mb-20">
                 <div class="flex justify-between items-end mb-8">
                     <div>
@@ -213,7 +195,6 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     <div v-for="tool in filteredTools" :key="tool.id" class="glass-card rounded-3xl p-6 flex flex-col h-full group relative overflow-hidden">
                         
-                        <!-- Tool Header -->
                         <div class="flex items-start justify-between mb-4 relative z-10">
                             <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-white to-gray-50 shadow-sm border border-gray-100 flex items-center justify-center text-brand text-2xl">
                                 <i :class="['ph', tool.icon]"></i>
@@ -223,26 +204,27 @@
                             </span>
                         </div>
 
-                        <!-- Tool Content -->
                         <div class="flex-1 relative z-10">
                             <h4 class="text-xl font-bold text-gray-800 mb-2 group-hover:text-brand transition-colors">{{ tool.title }}</h4>
                             <p class="text-sm text-gray-500 leading-relaxed mb-4">{{ tool.desc }}</p>
                         </div>
 
-                        <!-- Actions -->
-                        <div class="mt-4 pt-4 border-t border-gray-100/50 flex flex-col gap-2 relative z-10">
+                        <div class="mt-4 pt-4 border-t border-gray-100/50 flex flex-col gap-3 relative z-10">
                             <div v-for="(link, index) in tool.links" :key="index">
-                                <a :href="link.url" target="_blank" class="flex items-center justify-between w-full p-2 rounded-xl hover:bg-white/80 transition-colors group/link">
-                                    <span class="text-sm font-medium text-gray-700 flex items-center gap-2">
-                                        <i class="ph ph-calculator text-brand"></i>
+                                <a :href="link.url" target="_blank" 
+                                   class="flex items-center justify-between w-full p-3 rounded-xl transition-all duration-300 group/link"
+                                   :class="index === 0 ? 'btn-primary-action' : 'btn-secondary-link hover:bg-white/80'">
+                                    
+                                    <span class="text-sm font-bold flex items-center gap-2">
+                                        <i class="ph ph-calculator text-lg" :class="index === 0 ? 'text-white' : 'text-brand'"></i>
                                         {{ link.label }}
                                     </span>
-                                    <i class="ph ph-arrow-right text-gray-400 group-hover/link:text-brand transition-colors"></i>
+                                    <i class="ph ph-arrow-right" :class="index === 0 ? 'text-white' : 'text-gray-400 group-hover/link:text-brand'"></i>
                                 </a>
                             </div>
                             
                             <div v-if="tool.videos && tool.videos.length > 0" class="mt-2">
-                                <p class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2 pl-2">相關影音</p>
+                                <p class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2 pl-1">相關影音</p>
                                 <a v-for="(video, vIndex) in tool.videos" :key="vIndex" :href="video.url" target="_blank" class="flex items-center gap-2 p-2 rounded-xl hover:bg-red-50/50 group/video transition-colors">
                                     <div class="w-6 h-6 rounded-full bg-red-100 text-red-500 flex items-center justify-center text-xs">
                                         <i class="ph ph-play-fill"></i>
@@ -252,13 +234,11 @@
                             </div>
                         </div>
 
-                        <!-- Hover Gradient -->
                         <div class="absolute inset-0 bg-gradient-to-br from-teal-50/0 to-teal-50/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
                     </div>
                 </div>
             </section>
 
-            <!-- Strategy & Insights Dashboard -->
             <section id="strategy" class="glass-panel rounded-[2.5rem] p-8 md:p-12 mb-20 relative overflow-hidden">
                 <div class="absolute top-0 right-0 w-64 h-64 bg-blue-100/30 rounded-full blur-3xl -z-10"></div>
                 
@@ -304,9 +284,7 @@
                         </div>
                     </div>
 
-                    <!-- Charts Area -->
                     <div class="grid grid-cols-1 gap-6">
-                         <!-- Chart 1 Container -->
                          <div class="bg-white/60 backdrop-blur-sm p-6 rounded-3xl shadow-sm border border-white/50">
                             <h4 class="text-sm font-bold text-gray-500 uppercase mb-4 text-center">使用者裝置分佈 (Mobile First)</h4>
                             <div class="chart-container mx-auto" style="height: 250px;">
@@ -317,7 +295,6 @@
                 </div>
             </section>
 
-            <!-- Trust Section -->
             <section id="trust" class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="bg-gradient-to-br from-gray-900 to-gray-800 rounded-3xl p-8 text-white relative overflow-hidden group">
                     <div class="relative z-10">
@@ -328,15 +305,15 @@
                         <p class="text-gray-300 mb-6 text-sm leading-relaxed">
                             我們特別推廣「地籍異動即時通」與「稅籍異動即時通」。我們不僅在乎您的稅務規劃，更在乎您的資產安全。
                         </p>
-                        <button class="text-sm font-bold text-teal-400 hover:text-teal-300 flex items-center gap-2 transition-colors">
-                            了解防詐騙機制 <i class="ph ph-arrow-right"></i>
-                        </button>
+                        <a href="https://www.youtube.com/watch?si=YT-3uB96-9t8KuYk&v=5KWCcvU4x28&feature=youtu.be" target="_blank" class="inline-flex items-center gap-2 text-sm font-bold text-teal-400 hover:text-teal-300 transition-colors p-2 rounded-lg hover:bg-white/10">
+                            <span>觀看防詐騙宣導影片</span>
+                            <i class="ph ph-arrow-right"></i>
+                        </a>
                     </div>
-                    <!-- Decor -->
                     <i class="ph ph-lock-key absolute -bottom-4 -right-4 text-9xl text-white/5 rotate-12 group-hover:scale-110 transition-transform duration-500"></i>
                 </div>
 
-                <div class="glass-card rounded-3xl p-8 flex flex-col justify-center items-center text-center border-2 border-dashed border-gray-300 hover:border-brand/50 transition-colors cursor-pointer group">
+                <div class="glass-card rounded-3xl p-8 flex flex-col justify-center items-center text-center border-2 border-dashed border-gray-300 hover:border-brand/50 transition-colors cursor-pointer group relative">
                     <div class="w-16 h-16 rounded-full bg-teal-50 text-brand flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                         <i class="ph ph-chat-circle-text text-3xl"></i>
                     </div>
@@ -344,30 +321,31 @@
                     <p class="text-gray-500 text-sm mb-6 max-w-xs">
                         試算結果太複雜？讓專業代書為您解析細節。
                     </p>
-                    <button class="glass-btn px-8 py-3 rounded-xl font-bold w-full max-w-xs">
+                    <a href="https://line.me/R/ti/p/@604gpqef" target="_blank" class="glass-btn px-8 py-3 rounded-xl font-bold w-full max-w-xs flex items-center justify-center gap-2">
+                        <i class="ph ph-line-logo text-xl"></i>
                         加入 LINE 官方帳號
-                    </button>
+                    </a>
                 </div>
             </section>
 
         </main>
 
-        <!-- Footer -->
         <footer class="bg-white/50 backdrop-blur-lg border-t border-gray-200 mt-12 py-12">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
                 <div class="text-center md:text-left">
                     <h4 class="font-bold text-gray-900 text-lg">宏國地政 | 易丞地政</h4>
                     <p class="text-xs text-gray-500 mt-2">© 2026 Home Go Estate. All Rights Reserved.</p>
+                    <a href="https://www.homegoycl.com.tw/" target="_blank" class="text-xs text-teal-600 hover:text-teal-800 mt-2 inline-block">拜訪官方網站</a>
                 </div>
                 <div class="flex gap-4">
-                    <a href="#" class="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center text-gray-600 hover:text-brand hover:shadow-md transition-all">
+                    <a href="https://www.facebook.com/" target="_blank" class="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center text-gray-600 hover:text-[#1877F2] hover:shadow-md transition-all" title="Facebook">
                         <i class="ph ph-facebook-logo text-xl"></i>
                     </a>
-                    <a href="#" class="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center text-gray-600 hover:text-brand hover:shadow-md transition-all">
+                    <a href="https://www.youtube.com/@ycl_real_estate8888" target="_blank" class="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center text-gray-600 hover:text-[#FF0000] hover:shadow-md transition-all" title="YouTube">
                         <i class="ph ph-youtube-logo text-xl"></i>
                     </a>
-                    <a href="#" class="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center text-gray-600 hover:text-brand hover:shadow-md transition-all">
-                        <i class="ph ph-instagram-logo text-xl"></i>
+                    <a href="https://line.me/ti/g2/aVklWxyLP1RtfstQsslGQOlP4KViuFI7PPucdQ?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" target="_blank" class="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center text-gray-600 hover:text-[#00C300] hover:shadow-md transition-all" title="Line 社群">
+                        <i class="ph ph-users-three text-xl"></i>
                     </a>
                 </div>
             </div>
