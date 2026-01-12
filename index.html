@@ -85,7 +85,7 @@
             box-shadow: 0 6px 20px rgba(56, 178, 172, 0.4);
         }
 
-        /* Primary Action Button Style (High Visibility) */
+        /* Primary Action Button Style */
         .btn-primary-action {
             background: linear-gradient(90deg, #319795 0%, #2c7a7b 100%);
             color: white;
@@ -107,6 +107,39 @@
             background: white;
             color: #319795;
             border-color: #319795;
+        }
+
+        /* Floating Social Dock Styles */
+        .social-dock-btn {
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        /* Tooltip Animation */
+        .social-tooltip {
+            position: absolute;
+            right: 120%;
+            top: 50%;
+            transform: translateY(-50%) translateX(10px);
+            background: rgba(31, 41, 55, 0.9);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .social-dock-btn:hover .social-tooltip {
+            opacity: 1;
+            transform: translateY(-50%) translateX(0);
+        }
+
+        .social-dock-btn:hover {
+            transform: scale(1.1);
         }
 
         /* Custom Scrollbar */
@@ -131,7 +164,35 @@
 <body class="antialiased min-h-screen">
     
     <div id="app">
-        <nav class="fixed w-full z-50 transition-all duration-300" :class="{'glass-panel py-3': scrolled, 'bg-transparent py-5': !scrolled}">
+        
+        <aside class="fixed right-4 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-4">
+            <a href="https://line.me/R/ti/p/@604gpqef" target="_blank" class="social-dock-btn w-12 h-12 md:w-14 md:h-14 rounded-full bg-[#06C755] text-white flex items-center justify-center shadow-lg shadow-green-500/30 border-2 border-white/50">
+                <i class="ph ph-chat-circle-dots text-2xl md:text-3xl"></i>
+                <span class="social-tooltip">預約諮詢 (官方號)</span>
+            </a>
+
+            <a href="https://line.me/ti/g2/aVklWxyLP1RtfstQsslGQOlP4KViuFI7PPucdQ?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" target="_blank" class="social-dock-btn w-10 h-10 md:w-12 md:h-12 rounded-full bg-white text-[#06C755] flex items-center justify-center shadow-md border border-gray-100">
+                <i class="ph ph-users-three text-xl md:text-2xl"></i>
+                <span class="social-tooltip">加入社群</span>
+            </a>
+
+            <a href="https://www.facebook.com/" target="_blank" class="social-dock-btn w-10 h-10 md:w-12 md:h-12 rounded-full bg-white text-[#1877F2] flex items-center justify-center shadow-md border border-gray-100">
+                <i class="ph ph-facebook-logo text-xl md:text-2xl"></i>
+                <span class="social-tooltip">Facebook 粉絲專頁</span>
+            </a>
+
+            <a href="https://www.youtube.com/@ycl_real_estate8888" target="_blank" class="social-dock-btn w-10 h-10 md:w-12 md:h-12 rounded-full bg-white text-[#FF0000] flex items-center justify-center shadow-md border border-gray-100">
+                <i class="ph ph-youtube-logo text-xl md:text-2xl"></i>
+                <span class="social-tooltip">YouTube 頻道</span>
+            </a>
+
+            <a href="https://www.homegoycl.com.tw/" target="_blank" class="social-dock-btn w-10 h-10 md:w-12 md:h-12 rounded-full bg-white text-gray-600 flex items-center justify-center shadow-md border border-gray-100">
+                <i class="ph ph-globe text-xl md:text-2xl"></i>
+                <span class="social-tooltip">官方網站</span>
+            </a>
+        </aside>
+
+        <nav class="fixed w-full z-40 transition-all duration-300" :class="{'glass-panel py-3': scrolled, 'bg-transparent py-5': !scrolled}">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
                 <div class="flex items-center gap-3">
                     <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-400 to-teal-600 flex items-center justify-center text-white shadow-lg">
@@ -335,18 +396,10 @@
                 <div class="text-center md:text-left">
                     <h4 class="font-bold text-gray-900 text-lg">宏國地政 | 易丞地政</h4>
                     <p class="text-xs text-gray-500 mt-2">© 2026 Home Go Estate. All Rights Reserved.</p>
-                    <a href="https://www.homegoycl.com.tw/" target="_blank" class="text-xs text-teal-600 hover:text-teal-800 mt-2 inline-block">拜訪官方網站</a>
                 </div>
-                <div class="flex gap-4">
-                    <a href="https://www.facebook.com/" target="_blank" class="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center text-gray-600 hover:text-[#1877F2] hover:shadow-md transition-all" title="Facebook">
-                        <i class="ph ph-facebook-logo text-xl"></i>
-                    </a>
-                    <a href="https://www.youtube.com/@ycl_real_estate8888" target="_blank" class="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center text-gray-600 hover:text-[#FF0000] hover:shadow-md transition-all" title="YouTube">
-                        <i class="ph ph-youtube-logo text-xl"></i>
-                    </a>
-                    <a href="https://line.me/ti/g2/aVklWxyLP1RtfstQsslGQOlP4KViuFI7PPucdQ?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" target="_blank" class="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center text-gray-600 hover:text-[#00C300] hover:shadow-md transition-all" title="Line 社群">
-                        <i class="ph ph-users-three text-xl"></i>
-                    </a>
+                <div class="text-sm text-gray-500 flex gap-4">
+                    <a href="https://www.homegoycl.com.tw/" target="_blank" class="hover:text-brand">官方網站</a>
+                    <a href="#tools" class="hover:text-brand">試算工具</a>
                 </div>
             </div>
         </footer>
@@ -456,7 +509,6 @@
                 });
 
                 const initCharts = () => {
-                    // Device Chart (Mobile vs PC)
                     const ctxDevice = document.getElementById('deviceChart').getContext('2d');
                     new Chart(ctxDevice, {
                         type: 'doughnut',
@@ -465,8 +517,8 @@
                             datasets: [{
                                 data: [70, 30],
                                 backgroundColor: [
-                                    'rgba(56, 178, 172, 0.8)', // Teal
-                                    'rgba(160, 174, 192, 0.5)'  // Gray
+                                    'rgba(56, 178, 172, 0.8)',
+                                    'rgba(160, 174, 192, 0.5)'
                                 ],
                                 borderWidth: 0,
                                 hoverOffset: 4
